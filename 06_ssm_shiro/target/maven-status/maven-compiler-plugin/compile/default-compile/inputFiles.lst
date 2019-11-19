@@ -1,0 +1,16 @@
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\domain\User.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\service\impl\RoleServiceImpl.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\controller\UserController.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\service\impl\UserServiceImpl.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\service\PermissionService.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\service\RoleService.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\mapper\PermissionMapper.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\domain\Permission.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\service\UserService.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\controller\LoginController.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\realm\UserRealm.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\domain\Role.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\mapper\RoleMapper.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\utils\ActivierUser.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\service\impl\PermissionServiceImpl.java
+D:\workspace-sts\0520adv\06_ssm_shiro\src\main\java\com\sxt\mapper\UserMapper.java

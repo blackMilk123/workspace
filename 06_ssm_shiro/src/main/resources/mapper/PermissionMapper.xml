@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxt.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.sxt.domain.Permission">
+    <id column="perid" jdbcType="INTEGER" property="perid" />
+    <result column="pername" jdbcType="VARCHAR" property="pername" />
+    <result column="percode" jdbcType="VARCHAR" property="percode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    perid, pername, percode
+  </sql>
+<select id="queryPermissionByUserId"  resultType="com.sxt.domain.Permission">
+  SELECT
+	t1.*
+FROM
+	permission t1
+	INNER JOIN `user_role` t2
+	INNER JOIN role_permission t3 ON t2.roleid = t3.roleid
+	AND t1.perid = t3.perid
+WHERE
+	t2.userid =#{userid}
+</select>
+</mapper>
