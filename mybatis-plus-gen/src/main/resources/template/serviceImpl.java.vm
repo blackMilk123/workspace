@@ -1,0 +1,60 @@
+package ${package.ServiceImpl};
+
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.springframework.stereotype.Service;
+import   ${package.Entity}.${entity};
+import    ${package.Mapper}.${table.mapperName};
+import   ${package.Service}.${table.serviceName};
+import    ${superServiceImplClassPackage};
+/**
+ *code is far away from bug with the animal protecting
+ *   @description : ${entity} 服务实现类
+ *   ---------------------------------
+ * 	 @author ${author}
+ *   @since ${date}
+ */
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+
+ #*       //@Cacheable(value = "${entity}", key = "${entity} + #id", unless = "#result eq null")
+        @Override
+        public ${entity} selectById(Serializable id) {
+        *##*        if(baseRedisDao.hasMapKey("${entity}","id_"+id))
+                {
+                        return (${entity}) baseRedisDao.getMapField("${entity}","id_"+id);
+                }else*##*
+                        return super.selectById(id);
+        }
+
+       // @CachePut(value = "${entity}", key = "${entity} + #result.id", unless = "#result eq null")
+        @Override
+        public boolean updateById(${entity} entity) {
+##                baseRedisDao.removeMapField("${entity}","id_"+entity.getId());
+                return super.updateById(entity);
+        }
+
+        //@CacheEvict(value = "User", key = "${entity} + #id", condition = "#result eq true")
+        @Override
+        public boolean deleteById(Serializable id) {
+##                baseRedisDao.removeMapField("${entity}","id_"+id);
+                return super.deleteById(id);
+        }
+
+
+        //@CachePut(value = "${entity}", key = "${entity} + #resut.id", unless = "#result eq null")
+        @Override
+        public boolean insert(${entity} entity) {
+                boolean flag=super.insert(entity);
+##                if(flag)
+##                        baseRedisDao.addMap("${entity}","id_"+entity.getId(),entity);
+                return flag;
+        }*#
+
+#*        public boolean isExist${entity}(${entity} entity) {
+                return  dao.selectCount((Wrapper) new QueryWrapper().eq("id",entity.getId()))>0;
+          //  return dao.selectCount(new EntityWrapper<${entity}>().eq("id",entity.getId())) > 0;
+        }*#
+	
+}
