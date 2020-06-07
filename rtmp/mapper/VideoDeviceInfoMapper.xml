@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunrise.dao.VideoDeviceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sunrise.model.VideoDeviceInfo" >
+    <!--
+      视频监控设备信息表 video_deviceinfo
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="deviceSerial" property="deviceSerial" jdbcType="VARCHAR" />
+    <result column="deviceName" property="deviceName" jdbcType="VARCHAR" />
+    <result column="deviceType" property="deviceType" jdbcType="VARCHAR" />
+    <result column="deviceVersion" property="deviceVersion" jdbcType="VARCHAR" />
+    <result column="validateCode" property="validateCode" jdbcType="VARCHAR" />
+    <result column="isEncrypt" property="isEncrypt" jdbcType="INTEGER" />
+    <result column="encryptPassword" property="encryptPassword" jdbcType="VARCHAR" />
+    <result column="channelNo" property="channelNo" jdbcType="INTEGER" />
+    <result column="channelName" property="channelName" jdbcType="VARCHAR" />
+    <result column="createStatus" property="createStatus" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="createMsg" property="createMsg" jdbcType="VARCHAR" />
+    <result column="updateStatus" property="updateStatus" jdbcType="INTEGER" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updateMsg" property="updateMsg" jdbcType="VARCHAR" />
+    <result column="onlineStatus" property="onlineStatus" jdbcType="INTEGER" />
+    <result column="cloudStatus" property="cloudStatus" jdbcType="INTEGER" />
+    <result column="appId" property="appId" jdbcType="BIGINT" />
+    <result column="orgId" property="orgId" jdbcType="BIGINT" />
+    <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+    <result column="videoName" property="videoName" jdbcType="VARCHAR" />
+    <result column="viedoType" property="viedoType" jdbcType="INTEGER" />
+    <result column="videoUrl" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="bdLon" property="bdLon" jdbcType="VARCHAR" />
+    <result column="bdLat" property="bdLat" jdbcType="VARCHAR" />
+    <result column="picUrl" property="picUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="isRecommend" property="isRecommend" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+     `id`, `deviceSerial`, `deviceName`, `deviceType`, `deviceVersion`, `validateCode`, `isEncrypt`, `encryptPassword`, `channelNo`, `channelName`, `createStatus`, `createTime`, `createMsg`, `updateStatus`, `updateTime`, `updateMsg`, `onlineStatus`, `cloudStatus`, `appId`, `orgId`, `orgName`, `videoName`, `viedoType`, `videoUrl`, `bdLon`, `bdLat`, `picUrl`, `status`,`isRecommend`
+  </sql>
+  <sql id="Base_Column_List_t">
+     t.`id`, t.`deviceSerial`, t.`deviceName`, t.`deviceType`, t.`deviceVersion`, t.`validateCode`, t.`isEncrypt`, t.`encryptPassword`, t.`channelNo`, t.`channelName`, t.`createStatus`, t.`createTime`, t.`createMsg`, t.`updateStatus`, t.`updateTime`, t.`updateMsg`, t.`onlineStatus`, t.`cloudStatus`, t.`appId`, t.`orgId`, t.`orgName`, t.`videoName`, t.`viedoType`, t.`videoUrl`, t.`bdLon`, t.`bdLat`, t.`picUrl`, t.`status`,t.`isRecommend`
+  </sql>
+
+  <select id="getVideoList" resultMap="BaseResultMap" parameterType="map">
+    select * from video_deviceinfo
+    <where>
+      orgId = #{unitId}
+      <if test="videoName!=null and videoName!=''">
+        and videoName like "%"#{videoName}"%"
+      </if>
+    </where>
+  </select>
+
+  <select id="selectVideoListByType" resultMap="BaseResultMap" parameterType="map">
+    SELECT * FROM `video_deviceinfo` WHERE
+    1=1
+    <if test="viedoType!=null and viedoType!=''">
+      and viedoType =#{viedoType}
+    </if>
+    <if test="onlineStatus!=null and onlineStatus!=''">
+      and onlineStatus =#{onlineStatus}
+    </if>
+    GROUP BY orgId
+    ORDER BY createTime ASC
+  </select>
+</mapper>
