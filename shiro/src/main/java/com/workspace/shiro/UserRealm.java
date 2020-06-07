@@ -14,12 +14,9 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -40,12 +37,9 @@ public class UserRealm extends AuthorizingRealm {
         //得到用户名
         String username = token.getPrincipal().toString();
         String password = token.getCredentials().toString();
-
-
         User user = userService.queryUserName(username);
         List<String> permission = permissionService.queryPermissionByUserName(username);
         List<String> role = roleService.queryRoleByUserName(username);
-
         ActiveUser activeUser = new ActiveUser(role, permission, user);
         //数据库里查询是否有对应的用户
         //然后才会进行认证  不是用户名密码一起认证
@@ -71,16 +65,10 @@ public class UserRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
         ActiveUser activeUser = (ActiveUser) principalCollection.getPrimaryPrincipal();
-
-
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-
         info.addRoles(activeUser.getRoles());
        info.addStringPermissions(activeUser.getPermission());
-
-
 
         System.out.println("授权");
 

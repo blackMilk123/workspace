@@ -36,8 +36,8 @@ public class MybatisGen {
     private static String authorname="black_milk";     //作者
 //    private static String path =  "D:/IdeaProjects/quota/quota-gen";
 //    private static String authorname="Zhan";     //作者
-    private static String[] tables=new String[]{"edu_comment"};        //table名字
-    private static String prefix="";                     //table前缀
+    private static String[] tables=new String[]{"t_order","t_pay_log"};        //table名字
+    private static String prefix="t";                     //table前缀
     private static String basepackagename="com.online";
     private static String parentPackagePath=basepackagename+".";
 //    private static String path =  "D:/IdeaProjects/quota/quota-gen";
@@ -88,7 +88,8 @@ public class MybatisGen {
                         .setDriverName("com.mysql.cj.jdbc.Driver")
                         .setUsername("root")
                         .setPassword("root")
-                        .setUrl("jdbc:mysql://localhost:3306/edu?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong")
+//                        .setUrl("jdbc:mysql://localhost:3306/edu?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong")
+                        .setUrl("jdbc:mysql://demo.jxrisesun.com:3308/assetsauction?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull")
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()

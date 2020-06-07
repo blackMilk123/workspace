@@ -9,16 +9,24 @@ package com.study.lambda;
 public class FinalDemo  {
     public void test() throws Exception{
 
-        try {
-
-        }catch (Exception e){
-            throw new Exception();
-        }
     }
     public static void main(String[] args) {
 
-        final StringBuffer buffer = new StringBuffer("测试");
-        buffer.append("123");
-        System.out.println(buffer);
+//        List<Long> list =  new ArrayList<>();
+//        List<String> longList  = new ArrayList<>();
+//                longList.add("111");
+//        longList  = func(list);
+
+//      List<String> list1 =   new ArrayList<String>();
+//      List<Double> list2 =   new ArrayList<Double>();
+//
+//      list1 = list2;
+
+
+
     }
+
+//    private static List<Double> func(List<Double> list) {
+//        return Arrays.asList(1d,2d);
+//    }
 }

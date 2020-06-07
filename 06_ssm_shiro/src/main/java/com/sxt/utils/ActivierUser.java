@@ -12,7 +12,7 @@ public class ActivierUser {
 	private List<String> permissions;
 	
 	public ActivierUser() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public ActivierUser(User user, List<String> roles, List<String> permissions) {

@@ -36,15 +36,9 @@ public class  LoginController {
 	@RequestMapping("login")
 	public String login(String username,String pwd,
                         HttpSession session,Model model) throws Exception {
-
-
-
-
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, pwd);
-
         try {
-
             subject.login(token);
             ActivierUser activierUser = (ActivierUser) subject.getPrincipal();
             session.setAttribute("user",activierUser.getUser());
