@@ -1,0 +1,137 @@
+package ${package.Controller};
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
+    #if(${restControllerStyle})
+    #else
+    #end
+    #if(${superControllerClassPackage})
+    import  ${superControllerClassPackage};
+    #end
+import ${package.Service}.${table.serviceName};
+import  ${package.Entity}.${entity};
+
+/**
+ *code is far away from bug with the animal protecting
+ *   @description : ${entity} 控制器
+ *   ---------------------------------
+ * 	 @author ${author}
+ *   @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@Api(value="#if(${package.ModuleName})/${package.ModuleName}s #end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", description="${entity} 控制器")
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}s #end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass}<${table.serviceName},${entity}> {
+#else
+public class ${table.controllerName} {
+#end
+##    private final Logger logger = LoggerFactory.getLogger(${table.controllerName}.class);
+##
+##    @Autowired
+##    public ${table.serviceName} ${table.entityPath}Service;
+
+    /**
+     * @description : 获取分页列表
+     * ---------------------------------
+     * @author : ${author}
+     * @since : Create in ${date}
+     */
+    @PostMapping("/list")
+    @ApiOperation(value = "获取分页数据信息")
+    public IPage<${entity}> get${entity}List( @ApiParam(name="${table.entityPath}",value="筛选条件") @RequestBody(required = false) ${entity} ${table.entityPath}  ,
+                                @ApiParam(name="pageIndex",value="页数",required=true,defaultValue = "1")@RequestParam Integer pageIndex ,
+                                @ApiParam(name="pageSize",value="页大小",required=true,defaultValue = "10")@RequestParam Integer pageSize
+                                ) {
+        Page<${entity}> page=new Page<${entity}>(pageIndex,pageSize);
+        QueryWrapper<${entity}> queryWrapper=new QueryWrapper<>(${table.entityPath});
+        return service.page(page,queryWrapper);
+    }
+
+    /**
+     * @description : 通过id获取${entity}
+     * ---------------------------------
+     * @author : ${author}
+     * @since : Create in ${date}
+     */
+    @GetMapping("/get/{id}")
+    @ApiOperation(value = "通过id获取${entity}")
+    public ${entity} get${entity}ById(@PathVariable Long id) {
+        ${entity} ${table.entityPath}=service.getById(id);
+        return ${table.entityPath};
+    }
+
+    /**
+     * @description : 通过id删除${entity}
+     * ---------------------------------
+     * @author : ${author}
+     * @since : Create in ${date}
+     */
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation(value = "通过id删除${entity}")
+    public Boolean delete(@PathVariable Long id) {
+        Boolean success=service.removeById(id);
+        return success;
+    }
+
+    /**
+     * @description : 通过id删除${entity}
+     * ---------------------------------
+     * @author : ${author}
+     * @since : Create in ${date}
+     */
+    @PostMapping("/deletes")
+    @ApiOperation(value = "通过ids删除${entity}s")
+    public Boolean delete(@RequestBody(required = false) List<${entity}> select${table.entityPath}s) {
+        Boolean success=false;
+        if(select${table.entityPath}s!=null&&select${table.entityPath}s.size()!=0)
+        {
+            List<Long>  ids=new ArrayList<>();
+            for (${entity} ${table.entityPath}:select${table.entityPath}s)
+            ids.add(${table.entityPath}.getId());
+            success= service.removeByIds(ids);
+        }
+        return success;
+    }
+
+    /**
+     * @description : 通过id更新${entity}
+     * ---------------------------------
+     * @author : ${author}
+     * @since : Create in ${date}
+     */
+    @PutMapping("/update/{id}")
+    @ApiOperation(value="通过id更新${entity}")
+    public Boolean update(@ApiParam(name="id",value="id主键值",required=true) @PathVariable Long id,@RequestBody ${entity} ${table.entityPath}) {
+        if(id!=null)
+            ${table.entityPath}.setId(id);
+        Boolean success=service.updateById(${table.entityPath});
+        return success;
+    }
+
+    /**
+     * @description : 添加${entity}
+     * ---------------------------------
+     * @author : ${author}
+     * @since : Create in ${date}
+     */
+	@PostMapping("/add")
+    @ApiOperation(value="添加${entity}")
+    public Boolean add(@RequestBody ${entity}  ${table.entityPath}) {
+        Boolean success=service.save( ${table.entityPath});
+        return success;
+	}
+
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxt.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.sxt.domain.User">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userpwd" jdbcType="VARCHAR" property="userpwd" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, username, userpwd, sex, address
+  </sql>
+
+  <select id="queryUserByName"  resultType="com.sxt.domain.User">
+
+    select
+     *
+    from user where username=#{username}
+  </select>
+</mapper>
