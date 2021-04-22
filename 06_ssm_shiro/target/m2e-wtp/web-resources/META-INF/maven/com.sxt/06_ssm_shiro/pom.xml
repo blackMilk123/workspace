@@ -13,7 +13,7 @@
 		<servlet.version>3.1.0</servlet.version>
 		<jsp.version>2.3.1</jsp.version>
 		<spring.version>4.3.24.RELEASE</spring.version>
-		<mybatis.version>3.5.1</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 		<mybatis.spring.version>2.0.1</mybatis.spring.version>
 		<mysql.version>5.1.47</mysql.version>
 		<pagehelper.version>5.1.10</pagehelper.version>
